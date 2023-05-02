@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1구역 선택입니다</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap');
+
+        * {
+        box-sizing: border-box;
+        }
+
+        body {
+        background-color: gray;  /*배경 색상 -> 폰트 생상이랑 변경 후 gray로 변경ㄴ*/
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        }
+
+        /*좌석 구역 선택 태그*/
+        .seat_area {
+        margin: 20px 0;
+        }
+
+        /*좌석 구역의 전체 사각형*/
+        .container {
+        margin-bottom: 10px;
+        perspective: 1000px;
+        }
+
+        /*좌석 상태 별로 정보 알려주는 곳*/
+        .sh_seat {
+        background-color: black;
+        height: 12px;
+        width: 15px;
+        margin: 3px;
+        }
+
+        .sh_selected {
+        background-color: white;
+        height: 12px;
+        width: 15px;
+        margin: 3px;
+        }
+
+        .sh_occupied {
+        background-color: green;
+        height: 12px;
+        width: 15px;
+        margin: 3px;
+        }
+
+        .sh_impossible{
+            background-color: red;
+        height: 12px;
+        width: 15px;
+        margin: 3px;
+        }
+
+        /*좌석 선택 아이콘 생성*/
+        .seat {
+        background-color: black;
+        height: 12px;
+        width: 15px;
+        margin: 3px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+
+        cursor: pointer; /*마우스 올리면 손가락 표시로 바꿔주는 효과*/
+        }
+
+        .selected {
+        background-color: white;
+        height: 12px;
+        width: 15px;
+        margin: 3px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+
+        cursor: pointer; /*마우스 올리면 손가락 표시로 바꿔주는 효과*/
+        }
+
+        .occupied {
+        background-color: green;
+        height: 12px;
+        width: 15px;
+        margin: 3px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        }
+
+        .impossible{
+            background-color: red;
+            height: 12px;
+            width: 15px;
+            margin: 3px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+
+        /*---------------------------*/
+
+        .showcase {
+        padding: 5px 10px;
+        border-radius: 5px;
+        color: white; /*좌석 색깔 정보에 대한 글자 색깔*/
+        list-style-type: none;
+        display: flex;
+        justify-content: space-between;
+        }
+
+        .showcase li {
+        display: flex;
+        align-items: left;
+        justify-content: left;
+        margin: 0 10px;
+        }
+
+        .screen {
+        background-color: #fff;
+        height: 50px;
+        width: 100%;
+        margin-bottom: 10px; /*아래 좌석과 간격을 벌리기 위함*/
+        text-align: center; /*screen 가운데 정렬*/
+        line-height: 50px; /*screen의 위치를 조정 (말그대로 line 높이 조정)*/
+        }
+
+        #Text_Screen{
+        color : black;
+        font-size: small;
+        }
+
+        /*구역 별로 좌석*/
+        .group {
+        display: flex;
+        }
+
+        p.text span {
+        color: black;
+        }
+
+        #fixbt{
+        background-color: green;
+        border-radius: 10%;
+        }
+
+        #first{
+        font-size: 10pt;
+        position: fixed;
+        bottom: 78px;
+        right: -80px;
+        width: 300px;
+        }
+
+    </style>
+  </head>
+  <body>
+    <!-- ul 태그 : 순서가 없는 HTML 리스트를 정의-->
+    <ul class="showcase">
+      <li>
+        <div class="sh_seat"></div>
+        <small>빈 좌석</small>
+      </li>
+      <li>
+        <div class="sh_selected"></div>
+        <small>내가 선택한 좌석</small>
+      </li>
+      <li>
+        <div class="sh_occupied"></div>
+        <small>선택된 좌석</small>
+      </li>
+      <li> 
+        <div class="sh_impossible"></div>
+        <small>선택불가</small>
+      </li>
+    </ul>
+
+    <div class="container">
+      <div class="screen">
+        <span id="Text_Screen">SCREEN</span>
+      </div>
+
+      <span id="first">1구역</span>
+
+      <!--선택 상태 별로의 좌석 상태-->
+      <div class="group">
+        <div class="seat"></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
+      </div>
+      <div class="group">
+        <div class="seat"></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
+      </div>
+      <div class="group">
+        <div class="impossible"></div>
+        <div class="impossible"></div>
+        <div class="impossible"></div>
+        <div class="impossible"></div>
+        <div class="impossible"></div>
+        <div class="impossible"></div>
+        <div class="impossible"></div>
+        <div class="impossible"></div>
+      </div>
+      <div class="group">
+        <div class="impossible"></div>
+        <div class="impossible"></div>
+        <div class="impossible"></div>
+        <div class="impossible"></div>
+        <div class="impossible"></div>
+        <div class="impossible"></div>
+        <div class="impossible"></div>
+        <div class="impossible"></div>
+      </div>
+      <div class="group">
+        <div class="impossible"></div>
+        <div class="impossible"></div>
+        <div class="impossible"></div>
+        <div class="impossible"></div>
+        <div class="impossible"></div>
+        <div class="impossible"></div>
+        <div class="impossible"></div>
+        <div class="impossible"></div>
+      </div>
+      <div class="group">
+        <div class="impossible"></div>
+        <div class="impossible"></div>
+        <div class="impossible"></div>
+        <div class="impossible"></div>
+        <div class="impossible"></div>
+        <div class="impossible"></div>
+        <div class="impossible"></div>
+        <div class="impossible"></div>
+      </div>
+    </div>
+
+    <p class="text">
+      당신이 선택한 좌석은  <span id="count">0</span> 자리이고, 가격은 <span id="total"></span> 원
+    </p>
+
+    <button id='fixbt'>좌석 고정 시키기</button>
+
+    <script src="AreaRserv.js"></script>
+  </body>
+</html>
