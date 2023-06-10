@@ -16,4 +16,4 @@
 
 
 
-참조 : https://github.com/jhsung23/vanillajs-web-project/tree/master/movie-seat-booking
+
